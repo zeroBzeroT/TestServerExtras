@@ -21,12 +21,11 @@ public final class Plugin extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
-    private static @NotNull ItemStack makeHoe() {
-        ItemStack stack = new ItemStack(Material.NETHERITE_HOE, 1);
-        stack.addEnchantment(Enchantment.EFFICIENCY, 5);
-        stack.addEnchantment(Enchantment.FORTUNE, 3);
+    private static @NotNull ItemStack makeFishingRod() {
+        ItemStack stack = new ItemStack(Material.FISHING_ROD, 1);
+        stack.addEnchantment(Enchantment.LURE, 3);
+        stack.addEnchantment(Enchantment.LUCK_OF_THE_SEA, 3);
         stack.addEnchantment(Enchantment.UNBREAKING, 3);
-        stack.addEnchantment(Enchantment.SILK_TOUCH, 1);
         stack.addEnchantment(Enchantment.MENDING, 1);
         stack.addEnchantment(Enchantment.VANISHING_CURSE, 1);
         return stack;
@@ -40,83 +39,105 @@ public final class Plugin extends JavaPlugin implements Listener {
         return stack;
     }
 
+    private static @NotNull ItemStack makeHoe() {
+        ItemStack stack = new ItemStack(Material.NETHERITE_HOE, 1);
+        stack.addEnchantment(Enchantment.EFFICIENCY, 5);
+        stack.addEnchantment(Enchantment.FORTUNE, 3);
+        stack.addEnchantment(Enchantment.UNBREAKING, 3);
+        stack.addEnchantment(Enchantment.SILK_TOUCH, 1);
+        stack.addEnchantment(Enchantment.MENDING, 1);
+        stack.addEnchantment(Enchantment.VANISHING_CURSE, 1);
+        return stack;
+    }
+
+    private static @NotNull ItemStack makeEnchantedBook() {
+        ItemStack stack = new ItemStack(Material.ENCHANTED_BOOK, 1);
+        var rand = ThreadLocalRandom.current().nextInt(0, 16 + 1);
+        switch (rand) {
+            case 0 -> stack.addEnchantment(Enchantment.MENDING, 1);
+            case 1 -> stack.addEnchantment(Enchantment.UNBREAKING, 3);
+            case 2 -> stack.addEnchantment(Enchantment.EFFICIENCY, 5);
+            case 3 -> stack.addEnchantment(Enchantment.PROTECTION, 4);
+            case 4 -> stack.addEnchantment(Enchantment.BLAST_PROTECTION, 4);
+            case 5 -> stack.addEnchantment(Enchantment.DEPTH_STRIDER, 3);
+            case 6 -> stack.addEnchantment(Enchantment.FLAME, 1);
+            case 7 -> stack.addEnchantment(Enchantment.FORTUNE, 3);
+            case 8 -> stack.addEnchantment(Enchantment.INFINITY, 1);
+            case 9 -> stack.addEnchantment(Enchantment.SHARPNESS, 5);
+            case 10 -> stack.addEnchantment(Enchantment.SILK_TOUCH, 1);
+            case 11 -> stack.addEnchantment(Enchantment.SWEEPING_EDGE, 3);
+            case 12 -> stack.addEnchantment(Enchantment.THORNS, 3);
+            case 13 -> stack.addEnchantment(Enchantment.RESPIRATION, 3);
+            case 14 -> stack.addEnchantment(Enchantment.RIPTIDE, 3);
+            case 15 -> stack.addEnchantment(Enchantment.LOYALTY, 3);
+            case 16 -> stack.addEnchantment(Enchantment.POWER, 5);
+        }
+        return stack;
+    }
+
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.OAK_LOG,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.OBSIDIAN,
-                    ThreadLocalRandom.current().nextInt(1, 8 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.ENDER_CHEST,
-                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.GLOWSTONE,
-                    ThreadLocalRandom.current().nextInt(1, 1 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.QUARTZ_BLOCK,
-                    ThreadLocalRandom.current().nextInt(1, 1 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.COAL_BLOCK,
-                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.END_CRYSTAL,
-                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND,
-                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
-        if (ThreadLocalRandom.current().nextBoolean())
-            ev.getPlayer().getInventory().addItem(new ItemStack(Material.SHULKER_SHELL,
-                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
 
-        ev.getPlayer().getInventory().addItem(new ItemStack(Material.COOKED_BEEF,
-                ThreadLocalRandom.current().nextInt(4, 16 + 1)));
-        ev.getPlayer().getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,
-                ThreadLocalRandom.current().nextInt(4, 16 + 1)));
-        ev.getPlayer().getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE,
-                ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.OAK_LOG,
+                            ThreadLocalRandom.current().nextInt(1, 4)));
+
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.IRON_BLOCK,
+                            ThreadLocalRandom.current().nextInt(1, 2)));
+
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.COAL_BLOCK,
+                            ThreadLocalRandom.current().nextInt(1, 2)));
+
+        if (ThreadLocalRandom.current().nextInt(0, 4 + 1) == 0)
+            ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.OBSIDIAN,
+                            ThreadLocalRandom.current().nextInt(1, 8 + 1)));
+
+        if (ThreadLocalRandom.current().nextInt(0, 4 + 1) == 0)
+            ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.QUARTZ_BLOCK,
+                            ThreadLocalRandom.current().nextInt(1, 8 + 1)));
+
+        var rand = ThreadLocalRandom.current().nextInt(0, 3);
+        var count = ThreadLocalRandom.current().nextInt(6, 12);
+        switch (rand) {
+            case 0 -> ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.COOKED_BEEF, count));
+            case 1 -> ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.PORKCHOP, count));
+            case 2 -> ev.getPlayer().getInventory().addItem(
+                    new ItemStack(Material.GOLDEN_CARROT, count));
+        }
+
     }
 
     @EventHandler
     public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent ev) {
-        ev.getPlayer().giveExpLevels(ThreadLocalRandom.current().nextInt(20, 50));
+        ev.getPlayer().giveExp(ThreadLocalRandom.current().nextInt(10, 42 + 1), true);
     }
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent ev) {
         if (ev.getEntity().getType() == EntityType.PLAYER) return;
         if (!ev.getEntity().hasAI()) return;
-
         var rand = ThreadLocalRandom.current().nextInt(0, 100);
         switch (rand) {
-            case 0:
-                ev.getDrops().add(new ItemStack(Material.COOKED_BEEF, 16));
-                break;
-            case 1:
-                ev.getDrops().add(new ItemStack(Material.GOLDEN_CARROT, 16));
-                break;
-            case 2:
-                ev.getDrops().add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 4));
-                break;
-            case 10:
-                ev.getDrops().add(new ItemStack(Material.OBSIDIAN, 16));
-                break;
-            case 21:
-                ev.getDrops().add(new ItemStack(Material.DIAMOND, 3));
-                break;
-            case 22:
-                ev.getDrops().add(new ItemStack(Material.NETHERITE_SCRAP, 1));
-                break;
-            case 98:
-                ev.getDrops().add(makeFlintSteel());
-                break;
-            case 99:
-                ev.getDrops().add(makeHoe());
-                break;
+            case 0, 1, 2 -> ev.getDrops().add(new ItemStack(Material.ENDER_CHEST, 4));
+            case 3 -> ev.getDrops().add(new ItemStack(Material.END_CRYSTAL, 4));
+            case 4 -> ev.getDrops().add(new ItemStack(Material.SHULKER_SHELL, 2));
+            case 5 -> ev.getDrops().add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1));
+            case 6, 7 -> ev.getDrops().add(new ItemStack(Material.TOTEM_OF_UNDYING, 1));
+            case 8 -> ev.getDrops().add(makeFishingRod());
+            case 9 -> ev.getDrops().add(makeFlintSteel());
+            case 10 -> ev.getDrops().add(makeHoe());
+            case 11, 12, 13 -> ev.getDrops().add(makeEnchantedBook());
+            case 14, 15 -> ev.getDrops().add(new ItemStack(Material.DIAMOND_BLOCK, 1));
+            case 16, 17 -> ev.getDrops().add(new ItemStack(Material.NETHERITE_SCRAP, 2));
         }
     }
 
