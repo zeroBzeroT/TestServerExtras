@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,24 +35,38 @@ public final class Plugin extends JavaPlugin implements Listener {
         return stack;
     }
 
-    @Override
-    public void onEnable() {
-
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent ev) {
-
-    }
-
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.OAK_LOG,
+                    ThreadLocalRandom.current().nextInt(1, 16 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT,
+                    ThreadLocalRandom.current().nextInt(1, 8 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.OBSIDIAN,
+                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.GLOWSTONE,
+                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.QUARTZ_BLOCK,
+                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND,
+                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
 
+        ev.getPlayer().getInventory().addItem(new ItemStack(Material.COOKED_BEEF,
+                ThreadLocalRandom.current().nextInt(4, 16 + 1)));
+        ev.getPlayer().getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,
+                ThreadLocalRandom.current().nextInt(4, 16 + 1)));
+        ev.getPlayer().getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE,
+                ThreadLocalRandom.current().nextInt(1, 4 + 1)));
     }
 
     @EventHandler
     public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent ev) {
-
+        ev.getPlayer().giveExpLevels(ThreadLocalRandom.current().nextInt(20, 50));
     }
 
     @EventHandler
