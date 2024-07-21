@@ -44,25 +44,25 @@ public final class Plugin extends JavaPlugin implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.OAK_LOG,
-                    ThreadLocalRandom.current().nextInt(1, 16 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT,
-                    ThreadLocalRandom.current().nextInt(1, 8 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.OBSIDIAN,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.GLOWSTONE,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 1 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.QUARTZ_BLOCK,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 1 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.COAL_BLOCK,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.END_CRYSTAL,
-                    ThreadLocalRandom.current().nextInt(1, 4 + 1)));
+                    ThreadLocalRandom.current().nextInt(1, 2 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND,
                     ThreadLocalRandom.current().nextInt(1, 2 + 1)));
