@@ -11,13 +11,12 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
-
-import static org.bukkit.entity.EntityType.BAT;
 
 public final class Plugin extends JavaPlugin implements Listener {
 
@@ -117,23 +116,25 @@ public final class Plugin extends JavaPlugin implements Listener {
 
     private static @NotNull ItemStack makeEnchantedBook() {
         ItemStack stack = new ItemStack(Material.ENCHANTED_BOOK, 1);
+        var meta = (EnchantmentStorageMeta) stack.getItemMeta();
         switch (ThreadLocalRandom.current().nextInt(0, 15)) {
-            case  0 -> stack.addEnchantment(Enchantment.MENDING, 1);
-            case  1 -> stack.addEnchantment(Enchantment.UNBREAKING, 3);
-            case  2 -> stack.addEnchantment(Enchantment.EFFICIENCY, 5);
-            case  3 -> stack.addEnchantment(Enchantment.FORTUNE, 3);
-            case  4 -> stack.addEnchantment(Enchantment.SILK_TOUCH, 1);
-            case  5 -> stack.addEnchantment(Enchantment.PROTECTION, 4);
-            case  6 -> stack.addEnchantment(Enchantment.BLAST_PROTECTION, 4);
-            case  7 -> stack.addEnchantment(Enchantment.DEPTH_STRIDER, 3);
-            case  8 -> stack.addEnchantment(Enchantment.THORNS, 3);
-            case  9 -> stack.addEnchantment(Enchantment.RESPIRATION, 3);
-            case 10 -> stack.addEnchantment(Enchantment.SHARPNESS, 5);
-            case 11 -> stack.addEnchantment(Enchantment.SWEEPING_EDGE, 3);
-            case 12 -> stack.addEnchantment(Enchantment.FLAME, 1);
-            case 13 -> stack.addEnchantment(Enchantment.INFINITY, 1);
-            case 14 -> stack.addEnchantment(Enchantment.POWER, 5);
+            case  0 -> meta.addStoredEnchant(Enchantment.MENDING, 1, true);
+            case  1 -> meta.addStoredEnchant(Enchantment.UNBREAKING, 3, true);
+            case  2 -> meta.addStoredEnchant(Enchantment.EFFICIENCY, 5, true);
+            case  3 -> meta.addStoredEnchant(Enchantment.FORTUNE, 3, true);
+            case  4 -> meta.addStoredEnchant(Enchantment.SILK_TOUCH, 1, true);
+            case  5 -> meta.addStoredEnchant(Enchantment.PROTECTION, 4, true);
+            case  6 -> meta.addStoredEnchant(Enchantment.BLAST_PROTECTION, 4, true);
+            case  7 -> meta.addStoredEnchant(Enchantment.DEPTH_STRIDER, 3, true);
+            case  8 -> meta.addStoredEnchant(Enchantment.THORNS, 3, true);
+            case  9 -> meta.addStoredEnchant(Enchantment.RESPIRATION, 3, true);
+            case 10 -> meta.addStoredEnchant(Enchantment.SHARPNESS, 5, true);
+            case 11 -> meta.addStoredEnchant(Enchantment.SWEEPING_EDGE, 3, true);
+            case 12 -> meta.addStoredEnchant(Enchantment.FLAME, 1, true);
+            case 13 -> meta.addStoredEnchant(Enchantment.INFINITY, 1, true);
+            case 14 -> meta.addStoredEnchant(Enchantment.POWER, 5, true);
         }
+        stack.setItemMeta(meta);
         return stack;
     }
 
