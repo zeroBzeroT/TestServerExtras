@@ -179,7 +179,7 @@ public final class Plugin extends JavaPlugin implements Listener {
                 var stack = new ItemStack(Material.FIREWORK_ROCKET,
                         ThreadLocalRandom.current().nextInt(2, 8));
                 var meta = (FireworkMeta) stack.getItemMeta();
-                meta.setPower(10);
+                meta.setPower(3);
                 meta.setRarity(ItemRarity.UNCOMMON);
                 stack.setItemMeta(meta);
                 ev.getDrops().add(stack);
