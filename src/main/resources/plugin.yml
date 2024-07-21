@@ -1,0 +1,5 @@
+name: TestServerExtras
+version: @VERSION@
+description: Additions for the test-server
+main: org.zerobzerot.test_server_extras.Plugin
+api-version: 1.20

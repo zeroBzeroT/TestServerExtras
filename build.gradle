@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'xyz.jpenilla.run-paper' version '2.3.0'
+}
+
+group = 'org.zerobzerot'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://repo.papermc.io/repository/maven-public/'
+        content {
+            includeGroup 'com.mojang'
+            includeGroup 'io.papermc.paper'
+            includeGroup 'net.kyori'
+            includeGroup 'net.md-5'
+        }
+    }
+}
+
+dependencies {
+    // https://jd.papermc.io/paper/1.20/
+    compileOnly group: 'io.papermc.paper', name: 'paper-api', version: "${project.minecraft_version}-R0.1-SNAPSHOT"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+tasks.withType(JavaCompile).configureEach {
+    it.sourceCompatibility = it.targetCompatibility = JavaVersion.toVersion(21)
+    it.options.release = 21
+    it.options.encoding = 'UTF-8'
+}
+
+processResources {
+    filteringCharset "UTF-8"
+    filesMatching("plugin.yml") {
+        filter { line -> line.replace("@VERSION@", project.version) }
+    }
+}
+
+jar.archiveFileName.set("${project.name}-${project.version}+${project.minecraft_version}-paper.jar")
+jar.destinationDirectory.set(layout.buildDirectory.dir('dist'))
+
+tasks {
+    runServer {
+        runDirectory = layout.projectDirectory.dir('run')
+        minecraftVersion(project.minecraft_version)
+        dependsOn('build')
+        systemProperty('com.mojang.eula.agree', 'true')
+    }
+}
