@@ -16,6 +16,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class Plugin extends JavaPlugin implements Listener {
 
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
     private static @NotNull ItemStack makeHoe() {
         ItemStack stack = new ItemStack(Material.NETHERITE_HOE, 1);
         stack.addEnchantment(Enchantment.EFFICIENCY, 5);
