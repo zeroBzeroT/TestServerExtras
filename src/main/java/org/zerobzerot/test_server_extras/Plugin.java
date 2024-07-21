@@ -17,6 +17,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.bukkit.entity.EntityType.BAT;
+
 public final class Plugin extends JavaPlugin implements Listener {
 
     @Override
@@ -24,6 +26,18 @@ public final class Plugin extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
+    private static @NotNull ItemStack makeElytra() {
+        ItemStack stack = new ItemStack(Material.ELYTRA, 1);
+        stack.addEnchantment(Enchantment.UNBREAKING, 3);
+        stack.addEnchantment(Enchantment.MENDING, 1);
+        stack.addEnchantment(Enchantment.VANISHING_CURSE, 1);
+
+        var meta = stack.getItemMeta();
+        meta.setRarity(ItemRarity.EPIC);
+        stack.setItemMeta(meta);
+
+        return stack;
+    }
     private static @NotNull ItemStack makeFishingRod() {
         ItemStack stack = new ItemStack(Material.FISHING_ROD, 1);
         stack.addEnchantment(Enchantment.UNBREAKING, 3);
@@ -175,6 +189,12 @@ public final class Plugin extends JavaPlugin implements Listener {
         if (!ev.getEntity().hasAI()) return;
 
         switch (ev.getEntity().getType()) {
+            case BAT ->  {
+                ev.getDrops().add(makeElytra());
+                if (ThreadLocalRandom.current().nextBoolean()) {
+                    ev.getDrops().add(new ItemStack(Material.DRAGON_HEAD));
+                }
+            }
             case CREEPER -> {
                 var stack = new ItemStack(Material.FIREWORK_ROCKET,
                         ThreadLocalRandom.current().nextInt(2, 8));
