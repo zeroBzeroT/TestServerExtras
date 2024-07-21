@@ -50,6 +50,9 @@ public final class Plugin extends JavaPlugin implements Listener {
                     ThreadLocalRandom.current().nextInt(1, 4 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.OBSIDIAN,
+                    ThreadLocalRandom.current().nextInt(1, 8 + 1)));
+        if (ThreadLocalRandom.current().nextBoolean())
+            ev.getPlayer().getInventory().addItem(new ItemStack(Material.ENDER_CHEST,
                     ThreadLocalRandom.current().nextInt(1, 2 + 1)));
         if (ThreadLocalRandom.current().nextBoolean())
             ev.getPlayer().getInventory().addItem(new ItemStack(Material.GLOWSTONE,
