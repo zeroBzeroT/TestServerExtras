@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    // https://jd.papermc.io/paper/1.20/
+    // https://jd.papermc.io/paper/1.21/
     compileOnly group: 'io.papermc.paper', name: 'paper-api', version: "${project.minecraft_version}-R0.1-SNAPSHOT"
 }
 
